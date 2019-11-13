@@ -11,7 +11,7 @@
 ##  use:     pod 'libWardModuleAggregate'  
 
 shell:  
-pod spec create ZYModule  
+pod spec create libWardModuleAggregate  
 git tag -m"pod spec" "0.0.1"  
 git push origin --tags  
 pod trunk me(login in)  
