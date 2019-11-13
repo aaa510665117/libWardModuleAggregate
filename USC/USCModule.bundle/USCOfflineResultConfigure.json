@@ -1,0 +1,4 @@
+
+{
+    "Command_" : "rc:0,text:%_TEXT_%,service:cn.yunzhisheng.call,code:SETTING_EXEC,semantic:{intent:{name:%Command_%,confidence:-1.0}},history:cn.yunzhisheng.call"
+}
