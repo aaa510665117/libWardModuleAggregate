@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "libWardModuleAggregate"
-  s.version      = "1.0.5"
+  s.version      = "1.0.6"
   s.summary      = "A short description of libWardModuleAggregate."
 
   # This description is used to generate tags and improve search results.
@@ -65,7 +65,7 @@ Pod::Spec.new do |s|
   #
 
   # s.platform     = :ios
-    s.platform     = :ios, "8.0"
+    s.platform     = :ios, "10.0"
 
   #  When using multiple platforms
   # s.ios.deployment_target = "5.0"
@@ -94,7 +94,8 @@ Pod::Spec.new do |s|
   
   #s.source_files  = "libWardModuleAggregate"
   #s.source_files = "libWardModuleAggregate/**/*.{h,m}"
-
+  s.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO' }
+  s.libraries = "c++"
   s.subspec 'WardModuleAggregate' do |ss|
     ss.dependency 'Masonry', '~>1.1.0'
     ss.dependency 'GVUserDefaults', '~>1.0.2'
@@ -120,11 +121,14 @@ Pod::Spec.new do |s|
     ss.dependency 'AvoidCrash', '~> 2.5.2'
     ss.dependency 'ZYModule', '~> 1.0.28'
 
-    ss.resources 	    = 'Bundles/*.{png,xib,nib,bundle}' , 'USC/*.{png,xib,nib,bundle}'
+    ss.resources 	    = "Bundles/*.{png,xib,nib,bundle}" , "USC/*.{png,xib,nib,bundle}"
     #ss.public_header_files  = 'Headers/**/*.h'
-    ss.source_files  = 'Headers/**/*.h' ,  'BaiDu/BDSClientHeaders/**/*.h' , 'USC/*.h'
-    ss.vendored_libraries   = 'StaticLibs/*.a' , 'BaiDu/BDSClientLib/libBaiduSpeechSDK.a'
-    ss.vendored_frameworks  = 'USC/USCModule.framework'
+    ss.source_files  = "Headers/**/*.h" ,  "BaiDu/BDSClientHeaders/**/*.h" , "USC/*.h", "StaticLibs/*.a" , "BaiDu/BDSClientLib/libBaiduSpeechSDK.a"
+    ss.vendored_libraries   = "StaticLibs/*.a" , "BaiDu/BDSClientLib/libBaiduSpeechSDK.a"
+    ss.vendored_frameworks  = "USC/USCModule.framework"
+    ss.xcconfig = { 'USER_HEADER_SEARCH_PATHS' => 'BaiDu/BDSClientHeaders/**/*.{h}' }
+    ss.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO' }
+    ss.libraries = "c++"
   end
 
 
