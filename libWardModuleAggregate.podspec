@@ -119,23 +119,25 @@ Pod::Spec.new do |s|
     ss.dependency 'NIMSDK', '~> 4.5.0'
     ss.dependency 'AvoidCrash', '~> 2.5.2'
     ss.dependency 'ZYModule', '~> 1.0.28'
+    ss.dependency 'BDSTTS'
 
     ss.resources 	    = "Bundles/*.{png,xib,nib,bundle}"
-    ss.public_header_files  = 'Headers/*.h'
+    #ss.public_header_files  = 'Headers/**/*.h'
+    ss.source_files  = 'Headers/**/*.h'
     ss.vendored_libraries   = 'StaticLibs/*.a'
   end
 
   s.subspec 'BaiDu' do |ss|
-    ss.resources 	    = "BaiDu/BDSClientEASRResources/*.{png,xib,nib,bundle,dat}"
-    ss.resources 	    = "BaiDu/BDSClientResources/*.{png,xib,nib,bundle,dat}"
-    ss.public_header_files  = 'BaiDu/BDSClientHeaders/ASR/*.h'
+    #ss.resources 	    = "BaiDu/BDSClientEASRResources/*.{png,xib,nib,bundle,dat}"
+    #ss.resources 	    = "BaiDu/BDSClientResources/*.{png,xib,nib,bundle,dat}"
+    ss.source_files         = 'BaiDu/BDSClientHeaders/TTS/*.h'
     ss.vendored_libraries   = 'BaiDu/BDSClientLib/*.a'
   end
 
   s.subspec 'USC' do |ss|
     ss.resources 	    = "USC/*.{png,xib,nib,bundle,dat}"
-    ss.public_header_files  = 'USC/*.h'
-    ss.framework 	    = 'USC/USCModule'
+    ss.source_files         = 'USC/*.h'
+    ss.vendored_frameworks  = 'USC/USCModule.framework'
   end
 
   s.exclude_files = "Classes/Exclude"
