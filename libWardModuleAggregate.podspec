@@ -119,7 +119,6 @@ Pod::Spec.new do |s|
     ss.dependency 'NIMSDK', '~> 4.5.0'
     ss.dependency 'AvoidCrash', '~> 2.5.2'
     ss.dependency 'ZYModule', '~> 1.0.28'
-    ss.dependency 'BDSTTS'
 
     ss.resources 	    = "Bundles/*.{png,xib,nib,bundle}"
     #ss.public_header_files  = 'Headers/**/*.h'
