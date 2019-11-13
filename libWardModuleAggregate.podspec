@@ -120,24 +120,13 @@ Pod::Spec.new do |s|
     ss.dependency 'AvoidCrash', '~> 2.5.2'
     ss.dependency 'ZYModule', '~> 1.0.28'
 
-    ss.resources 	    = "Bundles/*.{png,xib,nib,bundle}"
+    ss.resources 	    = 'Bundles/*.{png,xib,nib,bundle}' , 'USC/*.{png,xib,nib,bundle,dat}'
     #ss.public_header_files  = 'Headers/**/*.h'
-    ss.source_files  = 'Headers/**/*.h'
-    ss.vendored_libraries   = 'StaticLibs/*.a'
-  end
-
-  s.subspec 'BaiDu' do |ss|
-    #ss.resources 	    = "BaiDu/BDSClientEASRResources/*.{png,xib,nib,bundle,dat}"
-    #ss.resources 	    = "BaiDu/BDSClientResources/*.{png,xib,nib,bundle,dat}"
-    ss.source_files         = 'BaiDu/BDSClientHeaders/TTS/*.h'
-    ss.vendored_libraries   = 'BaiDu/BDSClientLib/*.a'
-  end
-
-  s.subspec 'USC' do |ss|
-    ss.resources 	    = "USC/*.{png,xib,nib,bundle,dat}"
-    ss.source_files         = 'USC/*.h'
+    ss.source_files  = 'Headers/**/*.h' ,  'BaiDu/BDSClientHeaders/**/*.h' , 'USC/*.h'
+    ss.vendored_libraries   = 'StaticLibs/*.a' , 'BaiDu/BDSClientLib/*.a'
     ss.vendored_frameworks  = 'USC/USCModule.framework'
   end
+
 
   s.exclude_files = "Classes/Exclude"
 
