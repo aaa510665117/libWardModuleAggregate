@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "libWardModuleAggregate"
-  s.version      = "1.0.2"
+  s.version      = "1.0.3"
   s.summary      = "A short description of libWardModuleAggregate."
 
   # This description is used to generate tags and improve search results.
@@ -120,7 +120,7 @@ Pod::Spec.new do |s|
     ss.dependency 'AvoidCrash', '~> 2.5.2'
     ss.dependency 'ZYModule', '~> 1.0.28'
 
-    ss.resources 	    = 'Bundles/*.{png,xib,nib,bundle}' , 'USC/*.{png,xib,nib,bundle,dat}'
+    ss.resources 	    = 'Bundles/*.{png,xib,nib,bundle}' , 'USC/*.{png,xib,nib,bundle}'
     #ss.public_header_files  = 'Headers/**/*.h'
     ss.source_files  = 'Headers/**/*.h' ,  'BaiDu/BDSClientHeaders/**/*.h' , 'USC/*.h'
     ss.vendored_libraries   = 'StaticLibs/*.a' , 'BaiDu/BDSClientLib/*.a'
