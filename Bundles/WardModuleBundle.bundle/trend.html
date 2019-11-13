@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" style="height:100%;width:100%;">
+<head>
+    <meta charset="utf-8" />
+	 <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no" />
+    <title>趋势图</title>
+	<script>
+
+	    var device =1/devicePixelRatio;
+		var scale =0  ;
+		var deviceWidth = document.documentElement.clientWidth;
+		if (navigator.userAgent.match(/Android/i)) {
+			scale = device*1.5;
+			document.documentElement.style.fontSize = deviceWidth / 100 * devicePixelRatio * 0.9 + 'px';
+		}
+		else{
+			scale =  device >0.5 ? device :0.5 ;
+			document.documentElement.style.fontSize = deviceWidth / 100 * devicePixelRatio + 'px';
+		}
+		document.querySelector('meta[name="viewport"]').setAttribute('content','initial-scale=' + scale + ', maximum-scale=' + scale + ', minimum-scale=' + scale + ', user-scalable=no,width=device-width,height=device-height');
+	</script>
+    <style>
+	    .cont{color:#17a7ff;}
+		.pro{margin:0.58rem 0;}
+        #data-view { width: 100%; height: 100%; }
+    </style>
+</head>
+<body style="height:100%;width:100%;margin:0px;" >
+    <div id="data-view"></div>
+    <script src="jquery-1.11.3.min.js" type="text/javascript"></script>
+    <script src="echarts.min.js" type="text/javascript"></script>
+    <script>
+	var $history =0;
+        var $xtbz =1;
+        Date.fromRq16 = function (rq16) {
+        if (!rq16 || !rq16.length || rq16.length < 8) return new Date();
+		rq16=rq16.replace(/[^0-9]/ig,"");
+		var y = parseInt(rq16.substr(0, 4));
+		var m = parseInt(rq16.substr(4, 2)) - 1;
+		var d = parseInt(rq16.substr(6, 2));
+
+		var h = parseInt(rq16.length >= 10 ? rq16.substr(8, 2) : "01");
+		var mi = parseInt(rq16.length >= 12 ? rq16.substr(10, 2) : "01");
+		var s = parseInt(rq16.length >= 14 ? rq16.substr(12, 2) : "01");
+
+    return new Date(y, m, d, h, mi, s);
+        }
+
+        //格式化日期
+        Date.prototype.format = function (mask) {
+            var o = {
+                "y+": this.getFullYear(),
+                "MM?": this.getMonth() + 1, //month
+                "dd?": this.getDate(), //day
+                "HH?": this.getHours(), //hour
+                "mm?": this.getMinutes(), //minute
+                "ss?": this.getSeconds(), //second
+                "qq?": Math.floor((this.getMonth() + 3) / 3), //quarter
+                "S": this.getMilliseconds() //millisecond
+            }
+
+            if (o["y+"] == 1) return "";
+
+            for (var k in o) {
+                if (new RegExp("(" + k + ")").test(mask)) mask = mask.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("00" + o[k]).length - RegExp.$1.length));
+            }
+            return mask;
+        }
+    function findData(message) {
+	   var data=message.data;
+              window.chartView = echarts.init(document.getElementById('data-view'));
+              window.chartView.__Option = {
+                title: { left: 'left', text: '',textStyle:{fontSize:25,color:'#333'}},
+                tooltip: { trigger: 'item', formatter: '{a}<br/>{b}:{c}' },
+                xAxis: { type: 'category', name: '',data: [], boundaryGap:false,axisLine:{lineStyle:{color:'#CFD2D4'}},axisLabel:{margin:30,interval:0,textStyle:{fontSize:20,color:'#999'}}},
+				dataZoom: [],
+                grid: { top:'10%',left: '3%', right: '4%', bottom: '13%',containLabel: true, show: true },
+                yAxis: { type: 'value', name: '' ,nameTextStyle:{color:'#999',fontSize:23},axisLine:{lineStyle:{color:'#CFD2D4'}},axisLabel:{margin:30, textStyle:{fontSize:20,color:'#999'}}},
+               series: []
+            };
+		
+            window.chartView.setOption(window.chartView.__Option);
+	    if(message.success&&data&&data.length>0) loadData(data);
+	    else return;
+        };
+        
+
+        function loadData(data) {
+            var date = [];
+             var series = [{ areaStyle: {normal: {color: new echarts.graphic.LinearGradient( 0, 0, 0, 1,[{offset: 0, color: '#9EC5FF'},{offset: 0.8,color: '#fff'} ] )}},symbolSize: 13,symbol: 'circle',name: '', type: 'line', data: [], label: { normal: { show: true,textStyle:{fontSize:26,position:'top',color:'#17A7FF'} } },itemStyle:{normal:{color:'#17A7FF'}}, lineStyle: {normal: {color: '#4D8DFF',shadowColor:'#639BF2',shadowOffsetY:1,shadowBlur:5,opacity:0.5} }}];
+			var dataZoom = [{ show: true,realtime: true,start: 80,end: 100 },{type: 'inside',realtime: true,start: 80,end: 100 }];
+           var max_value = 0;
+			var tooltip={};
+			var unit="";
+			var reference="";
+			
+            for (var i = 0; i < data.length; i++) {
+                // 去掉开头的 '>','<'
+                var start = data[i].value.slice(0, 1);
+                if(start=='>'||start=='<'){
+                    data[i].value = data[i].value.slice(1);
+                }
+                
+			    if(isNaN(parseFloat(data[i].value))) return;
+                date.push(Date.fromRq16(data[i].date).format("yyyy.MM.dd \n HH:mm"));
+                series[0].data.push(data[i].value);
+                if (parseFloat(data[i].value) > max_value) max_value = parseFloat(data[i].value);
+            }
+
+            window.chartView.__Option.xAxis.data = date;
+            window.chartView.__Option.series = series;
+			
+            if (data.length > 0) {
+                if (data[0].basic) {
+					reference=data[0].basic;
+                    var marks = [];
+                    data[0].basic.replace(/[0-9]+[\.0-9]*/g, function (v) {
+                        if (marks.length == 0) {
+                            marks.push({ yAxis: parseFloat(v), name: '参考值下限', lineStyle: { normal: { color: "green" } } });
+                        }
+                        else {
+                            marks.push({ yAxis: parseFloat(v),name: '参考值上限', lineStyle: { normal: { color: "red" } } });
+                            window.chartView.__Option.yAxis.max = (Math.max(max_value, parseFloat(v)) + (Math.max(max_value, parseFloat(v)) * 0.2)).toFixed(v.indexOf(".") > 0 ? (v.length - v.indexOf(".") -1) : 0);
+                        }
+                    });
+                    if (marks.length > 0) $.extend(series[0], { markLine: {  itemStyle:{normal:{label:{textStyle:{fontSize:22}}}},data: marks } });
+                }
+                 unit =  (data[0].unit &&  (data[0].unit || "") ) || "";
+				 window.chartView.__Option.yAxis.name = unit;
+            }
+            
+			tooltip = {axisPointer:{type:'line',lineStyle:{color:'#17a7ff'}},trigger: 'axis',backgroundColor:'#fff',padding:[10,15],textStyle:{color:'#000',fontSize:18},borderWidth:1,borderColor:'#17a7ff',formatter: function (params, ticket, callback) 
+				  { 
+					  var htmlStr = '';
+					  for(var i=0;i<params.length;i++)
+					  {
+						  var param = params[i];
+						  var xName = param.name;//x轴日期
+						  var value = param.value;//y轴值
+						  var arr =[];
+						  if(reference.length>0) arr = reference.split("～");
+						  htmlStr+="<div class='pro'><span >报告类别：</span><span class='cont'>检验</span></div>";
+						  if(arr.length>1&&(value>Math.max(arr[0],arr[1])||value<Math.min(arr[0],arr[1])))
+						  htmlStr+="<div style='color:red;' class='pro'><span >检验结果：</span><span >"+value+"&nbsp"+(data[0].unit || "")+"</span></div>";
+						  else htmlStr+="<div class='pro'><span >检验结果：</span><span class='cont'>"+value+"&nbsp"+(data[0].unit || "")+"</span></div>";
+						  htmlStr+="<div class='pro'><span >&nbsp&nbsp&nbsp&nbsp参考值：</span><span class='cont'>"+reference+"&nbsp"+(data[0].unit || "")+"</span></div>";
+						  htmlStr+="<div class='pro'><span >发布日期：</span><span class='cont'>"+xName+"</span></div>";
+						
+					  }
+					  return htmlStr;
+					}
+				}
+            //window.chartView.__Option.title.text ="     "+  name + "趋势图";
+			if(data.length>10)				window.chartView.__Option.dataZoom=dataZoom;
+		    window.chartView.__Option.tooltip=tooltip;
+			window.chartView.clear();
+            window.chartView.setOption(window.chartView.__Option,true);
+			if(data.length>10) $App.alert("向前滑动查看历史数据");
+		}
+		 
+    </script>
+</body>
+</html>

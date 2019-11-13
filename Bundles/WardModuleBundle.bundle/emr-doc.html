@@ -1,0 +1,327 @@
+<html xmlns="http://www.w3.org/1999/xhtml" style="height:100%;width:100%;">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta id="viewportEl" name="viewport" content="width=device-width,height=device-height,user-scalable=yes" />
+    <link rel="Stylesheet" href="content/site.css" />
+    <title>病历</title>
+    <style type="text/css">
+        body {
+            margin: 0px;
+            padding: 0px;
+            height: 100%;
+        }
+
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: rgba(0,0,0,0) !important;
+        }
+
+        .big-title {
+            display: none;
+        }
+
+        .emr-title {
+            font-size: 1.1em;
+            color: #555555;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        .emr-text {
+            color: #555555;
+            font-size: 1em;
+        }
+
+        p {
+            line-height: 1.8em;
+            margin-top: 0px;
+            margin-bottom: 0px;
+            clear: both;
+        }
+
+        .emr-atom {
+            color: #17a7ff;
+            font-size: 1em;
+        }
+
+        .emr-atom .name {
+            font-family: SimHei;
+            font-size: 1.1em;
+        }
+
+        .emr-atom .noname {
+        }
+
+        .emr-atom .spliter {
+        }
+
+        .emr-atom .value {
+            padding-right: 10px;
+        }
+
+        .emr-atom .unit {
+            color: #0000ae;
+        }
+
+        .tooth {
+            line-height: 90%;
+            display: inline-block;
+            width: 4.5em;
+            position: relative;
+            vertical-align: middle;
+            top: 16px;
+            padding-right: 12px;
+            padding-left: 12px;
+        }
+
+        .tooth .t1 {
+            width: 50%;
+            display: block;
+            text-align: right;
+            padding-right: 5px;
+            vertical-align: bottom;
+            float: left;
+            border-bottom: 1px black solid;
+            border-right: 1px black solid;
+        }
+
+        .tooth .t2 {
+            position: relative;
+            left: 11px;
+            top: -15px;
+            width: 50%;
+            display: block;
+            text-align: left;
+            padding-left: 5px;
+            float: right;
+            border-bottom: 1px black solid;
+        }
+
+        .tooth .t3 {
+            position: relative;
+            top: -15px;
+            left: 0px;
+            width: 50%;
+            display: inline-block;
+            text-align: center;
+            border-right: 1px black solid;
+            text-align: right;
+            padding-right: 5px;
+        }
+
+        .tooth .t4 {
+            top: -30px;
+            left: 11px;
+            position: relative;
+            display: block;
+            width: 50%;
+            float: right;
+            text-align: center;
+            border-top: 1px black solid;
+            border-left: 1px black solid;
+            text-align: left;
+            padding-left: 5px;
+        }
+
+        .fraction {
+            padding-right: 12px;
+            padding-left: 12px;
+        }
+
+        .fraction .f {
+            line-height: 90%;
+            display: inline-block;
+            vertical-align: middle;
+        }
+
+        .fraction .f .n {
+            text-align: center;
+            vertical-align: bottom;
+            display: block;
+            border-bottom: 1px black solid;
+            padding-left: 3px;
+            padding-right: 3px;
+        }
+
+        .fraction .f .d {
+            text-align: center;
+            vertical-align: bottom;
+            display: block;
+            padding-left: 3px;
+            padding-right: 3px;
+        }
+
+        .emr-chk {
+            zoom: 137.5%;
+            vertical-align: middle;
+        }
+
+        .sign {
+            text-align: right;
+        }
+
+        .emr-tab {
+            width: 100%;
+        }
+
+        .emr-tab td {
+            text-align: center;
+            vertical-align: middle;
+            border-top: 1px black solid;
+            border-left: 1px black solid;
+            height: 2em;
+        }
+
+        .emr-tab tr:last-child td {
+            border-bottom: 1px black solid;
+        }
+
+        .emr-tab td:last-child {
+            border-right: 1px black solid;
+        }
+
+        .emr-tab .emr-col {
+            color: #555555;
+            font-size: 1em;
+            font-weight: bold;
+        }
+
+        .emr-tab .emr-cell {
+            color: #555555;
+            font-size: 1em;
+        }
+
+        .emr-grid {
+            padding-left: 5%;
+            padding-right: 5%;
+            width: 90%;
+            position: relative;
+            min-width: 800px;
+        }
+
+        .emr-grid .emr-row {
+            position: absolute;
+            width: 100%;
+        }
+
+        .emr-grid .emr-cell {
+            float: left;
+            height: 100%;
+            word-break: break-all;
+        }
+
+        .emr-grid .b-all {
+            border: 1px blue solid;
+        }
+
+        .emr-grid .b-b {
+            border-bottom: 1px blue solid;
+        }
+
+        .emr-grid .b-r {
+            border-right: 1px blue solid;
+        }
+
+        .emr-grid .b-t {
+            border-top: 1px blue solid;
+        }
+
+        .emr-grid .b-l {
+            border-left: 1px blue solid;
+        }
+
+        .case {
+            height: 100%;
+            width: 100%;
+            padding-bottom: 20%;
+        }
+
+        .case-title {
+            min-height: 12%;
+            width: 100%;
+            padding: 1%;
+            font-size: 1em;
+        }
+
+        .case-title > div {
+            width: 100%;
+            height: 100%;
+            background-color: #fff;
+            border-radius: 5px;
+        }
+
+        .case-info, .case-zd {
+            padding-bottom: 0.4em;
+        }
+
+        .case-bed {
+            display: inline-block;
+            line-height: 1.2em;
+            height: 1.5em;
+            width: 18%;
+            text-align: center;
+        }
+
+        .case-age {
+            color: #999;
+        }
+
+        .case-model {
+            width: 100%;
+            height: 82%;
+            font-size: 1em;
+        }
+
+        .case-content {
+            width: 100%;
+            height: 100%;
+        }
+
+        .case-content > div {
+            width: 100%;
+            margin: 0 auto;
+            min-height: 2em;
+            margin-top: 0.8em;
+        }
+
+        .case-content > div:after {
+            clear: both;
+            content: '.';
+            display: block;
+            width: 0;
+            height: 0;
+            visibility: hidden;
+        }
+
+        .case-tab {
+            float: left;
+            color: #999;
+            width: 37%;
+            height: 100%;
+            text-align: right;
+            margin-right: 0.3em;
+        }
+
+        .case-detail {
+            float: left;
+            color: black;
+            width: 60%;
+            text-align: left;
+            height: 100%;
+            white-space: normal;
+        }
+
+        .case-yqks > span, .case-yqys > span {
+            display: inline-block;
+            min-width: 50%;
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+    </style>
+    <script type="text/javascript">var loadContent = function (data) { var s = data.html.replace(/overflow:hidden/g,'');document.body.innerHTML = s }</script>
+</head>
+<body style="width:100%;height:100%;padding:15px;">
+
+</body>
+</html>
