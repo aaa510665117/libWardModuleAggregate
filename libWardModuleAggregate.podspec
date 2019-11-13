@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "libWardModuleAggregate"
-  s.version      = "1.0.4"
+  s.version      = "1.0.5"
   s.summary      = "A short description of libWardModuleAggregate."
 
   # This description is used to generate tags and improve search results.
@@ -123,7 +123,7 @@ Pod::Spec.new do |s|
     ss.resources 	    = 'Bundles/*.{png,xib,nib,bundle}' , 'USC/*.{png,xib,nib,bundle}'
     #ss.public_header_files  = 'Headers/**/*.h'
     ss.source_files  = 'Headers/**/*.h' ,  'BaiDu/BDSClientHeaders/**/*.h' , 'USC/*.h'
-    ss.vendored_libraries   = 'StaticLibs/*.a' , 'BaiDu/BDSClientLib/*.a'
+    ss.vendored_libraries   = 'StaticLibs/*.a' , 'BaiDu/BDSClientLib/libBaiduSpeechSDK.a'
     ss.vendored_frameworks  = 'USC/USCModule.framework'
   end
 
