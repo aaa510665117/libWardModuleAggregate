@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "libWardModuleAggregate"
-  s.version      = "1.0.10"
+  s.version      = "1.0.11"
   s.summary      = "A short description of libWardModuleAggregate."
 
   # This description is used to generate tags and improve search results.
@@ -121,13 +121,12 @@ Pod::Spec.new do |s|
     ss.dependency 'AvoidCrash', '~> 2.5.2'
     ss.dependency 'ZYModule', '~> 1.0.28'
 
-    ss.resources 	    = "Bundles/*.{png,xib,nib,bundle}" , "USC/*.{png,xib,nib,bundle}"
-    ss.public_header_files  = 'Headers/**/*.h'
+    ss.resources 	    = "Bundles/*.{png,xib,nib,bundle}"
+    #ss.public_header_files  = 'Headers/**/*.h'
     ss.source_files  = "Headers/**/*.h"
-    s.static_framework  =  true
     ss.vendored_libraries   = "StaticLibs/*.a"
     #ss.vendored_frameworks  = "StaticLibs/*.a"
-    ss.xcconfig = { 'USER_HEADER_SEARCH_PATHS' => 'BaiDu/BDSClientHeaders/**/*.{h}' }
+    #ss.xcconfig = { 'USER_HEADER_SEARCH_PATHS' => 'BaiDu/BDSClientHeaders/**/*.{h}' }
     ss.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO', 'VALID_ARCHS[sdk=iphonesimulator*]' => ''}
     ss.libraries = "c++"
   end
