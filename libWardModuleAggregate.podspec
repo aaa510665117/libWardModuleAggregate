@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "libWardModuleAggregate"
-  s.version      = "1.0.11"
+  s.version      = "1.0.12"
   s.summary      = "A short description of libWardModuleAggregate."
 
   # This description is used to generate tags and improve search results.
@@ -122,7 +122,7 @@ Pod::Spec.new do |s|
     ss.dependency 'ZYModule', '~> 1.0.28'
 
     ss.resources 	    = "Bundles/*.{png,xib,nib,bundle}"
-    #ss.public_header_files  = 'Headers/**/*.h'
+    ss.public_header_files  = 'Headers/**/*.h'
     ss.source_files  = "Headers/**/*.h"
     ss.vendored_libraries   = "StaticLibs/*.a"
     #ss.vendored_frameworks  = "StaticLibs/*.a"
