@@ -127,7 +127,7 @@ Pod::Spec.new do |s|
     ss.vendored_libraries   = "StaticLibs/*.a" , "BaiDu/BDSClientLib/libBaiduSpeechSDK.a"
     ss.vendored_frameworks  = "USC/USCModule.framework"
     ss.xcconfig = { 'USER_HEADER_SEARCH_PATHS' => 'BaiDu/BDSClientHeaders/**/*.{h}' }
-    ss.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO' }
+    ss.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO', 'VALID_ARCHS[sdk=iphonesimulator*]' => ''}
     ss.libraries = "c++"
   end
 
