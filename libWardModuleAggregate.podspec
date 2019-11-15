@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "libWardModuleAggregate"
-  s.version      = "1.0.13"
+  s.version      = "1.0.15"
   s.summary      = "A short description of libWardModuleAggregate."
 
   # This description is used to generate tags and improve search results.
@@ -124,7 +124,7 @@ Pod::Spec.new do |s|
     ss.resources 	    = "Bundles/WinningFoundationBundle.{png,xib,nib,bundle}"
     ss.public_header_files  = 'Headers/WinningFoundation/*.h'
     ss.source_files  = "Headers/WinningFoundation/*.h"
-    ss.vendored_libraries   = "StaticLibs/libWinningFoundation.a"
+    ss.vendored_libraries   = "StaticLibs/WinningFoundation.a"
     #ss.vendored_frameworks  = "StaticLibs/*.a"
     #ss.xcconfig = { 'USER_HEADER_SEARCH_PATHS' => 'BaiDu/BDSClientHeaders/**/*.{h}' }
     ss.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO', 'VALID_ARCHS[sdk=iphonesimulator*]' => ''}
@@ -159,7 +159,7 @@ Pod::Spec.new do |s|
     ss.resources 	    = "Bundles/WinningUIKitBundle.{png,xib,nib,bundle}"
     ss.public_header_files  = 'Headers/WinningUIKit/*.h'
     ss.source_files  = "Headers/WinningUIKit/*.h"
-    ss.vendored_libraries   = "StaticLibs/libWinningUIKit.a"
+    ss.vendored_libraries   = "StaticLibs/WinningUIKit.a"
     #ss.vendored_frameworks  = "StaticLibs/*.a"
     #ss.xcconfig = { 'USER_HEADER_SEARCH_PATHS' => 'BaiDu/BDSClientHeaders/**/*.{h}' }
     ss.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO', 'VALID_ARCHS[sdk=iphonesimulator*]' => ''}
@@ -170,7 +170,7 @@ Pod::Spec.new do |s|
     ss.resources 	    = "Bundles/WardModuleBundle.{png,xib,nib,bundle}"
     ss.public_header_files  = 'Headers/WardModule/*.h'
     ss.source_files  = "Headers/WardModule/*.h"
-    ss.vendored_libraries   = "StaticLibs/libWardModule.a"
+    ss.vendored_libraries   = "StaticLibs/WardModule.a"
     #ss.vendored_frameworks  = "StaticLibs/*.a"
     #ss.xcconfig = { 'USER_HEADER_SEARCH_PATHS' => 'BaiDu/BDSClientHeaders/**/*.{h}' }
     ss.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO', 'VALID_ARCHS[sdk=iphonesimulator*]' => ''}
@@ -181,8 +181,8 @@ Pod::Spec.new do |s|
     ss.resources 	    = "Bundles/TeachingModuleBundle.{png,xib,nib,bundle}"
     ss.public_header_files  = 'Headers/TeachingModule/*.h'
     ss.source_files  = "Headers/TeachingModule/*.h"
-    ss.vendored_libraries   = "StaticLibs/libTeachingModule.a"
-    #ss.vendored_frameworks  = "StaticLibs/libTeachingModule.a"
+    ss.vendored_libraries   = "StaticLibs/TeachingModule.a"
+    #ss.vendored_frameworks  = "StaticLibs/TeachingModule.a"
     #ss.xcconfig = { 'USER_HEADER_SEARCH_PATHS' => 'BaiDu/BDSClientHeaders/**/*.{h}' }
     ss.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO', 'VALID_ARCHS[sdk=iphonesimulator*]' => ''}
     ss.libraries = "c++"
@@ -192,7 +192,7 @@ Pod::Spec.new do |s|
     ss.resources 	    = "Bundles/ConsultationModuleBundle.{png,xib,nib,bundle}"
     ss.public_header_files  = 'Headers/ConsultationModule/*.h'
     ss.source_files  = "Headers/ConsultationModule/*.h"
-    ss.vendored_libraries   = "StaticLibs/libConsultationModule.a"
+    ss.vendored_libraries   = "StaticLibs/ConsultationModule.a"
     #ss.vendored_frameworks  = "StaticLibs/*.a"
     #ss.xcconfig = { 'USER_HEADER_SEARCH_PATHS' => 'BaiDu/BDSClientHeaders/**/*.{h}' }
     ss.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO', 'VALID_ARCHS[sdk=iphonesimulator*]' => ''}
